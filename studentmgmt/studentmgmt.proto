@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package studentmgmt;
+
+option go_package = "github.com/an1l4/go-studentmgmt-grpc;go_studentmgmt_grpc";
+
+service StudentManagement {
+    rpc CreateNewStudent(StudentList) returns (Id) {}
+    rpc GetAllStudent (Empty) returns (stream StudentList) {}
+    rpc GetStudentBySection (Section) returns (StudentList) {}
+    rpc GetStudentByClass (Class) returns (StudentList) {}
+    rpc GetStudentByClassAndSection (ClassSectionInfo) returns (stream StudentList) {}
+    rpc UpdateStudent (StudentList) returns (Status) {}
+    rpc DeleteStudent (Id) returns (Status) {}
+
+}
+
+message StudentList {
+    string id = 1;
+    string name = 2;
+    int32 rollnumber = 3;
+    int32 class = 4;
+    string section = 5;
+    repeated string hobby = 6;
+
+}
+
+message Empty {
+
+}
+
+message ClassSectionInfo {
+    int32 classvalue = 1;
+    string sectionvalue = 2;
+
+}
+
+message Id {
+    string value = 1;
+    
+}
+
+message Status {
+    int32 value = 1;
+}
+
+message Section {
+    string value = 1;
+}
+
+message Class {
+    int32 value = 1;
+}
